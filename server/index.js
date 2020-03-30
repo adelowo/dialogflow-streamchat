@@ -62,7 +62,11 @@ app.post("/dialogflow", async (req, res) => {
     .then((text) => {
       channel.sendMessage({
         text: text,
-        user: { id: "admin", image: "https://bit.ly/2TIt8NR", name: "Admin bot" },
+        user: {
+          id: "admin",
+          image: "https://bit.ly/2TIt8NR",
+          name: "Admin bot",
+        },
       });
       res.json({
         status: true,
