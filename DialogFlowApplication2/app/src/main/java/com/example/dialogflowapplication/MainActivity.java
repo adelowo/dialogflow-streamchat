@@ -1,26 +1,19 @@
 package com.example.dialogflowapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
-
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.example.dialogflowapplication.databinding.ActivityMainBinding;
 import com.getstream.sdk.chat.StreamChat;
 import com.getstream.sdk.chat.enums.FilterObject;
 import com.getstream.sdk.chat.rest.User;
 import com.getstream.sdk.chat.rest.core.Client;
 import com.getstream.sdk.chat.viewmodel.ChannelListViewModel;
-
 import java.util.HashMap;
 
-import static com.getstream.sdk.chat.enums.Filters.and;
-import static com.getstream.sdk.chat.enums.Filters.in;
 import static com.getstream.sdk.chat.enums.Filters.eq;
-
-import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         // setup the client using the example API key
