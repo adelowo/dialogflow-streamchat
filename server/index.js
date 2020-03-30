@@ -42,8 +42,8 @@ app.use(cors());
 
 const client = new StreamChat(process.env.API_KEY, process.env.API_SECRET);
 
-const channel = client.channel("messaging", "gdpr-chat-export", {
-  name: "GDPR Chat export",
+const channel = client.channel("messaging", "dialogflow", {
+  name: "Dialogflow chat",
   created_by: { id: "admin" },
 });
 
@@ -79,6 +79,29 @@ app.post("/dialogflow", async (req, res) => {
         status: false,
       });
     });
+});
+
+app.post("/auth", async (req, res) => {
+  const username = req.body.username;
+
+  const token = client.createToken(username);
+
+  await client.updateUser({ id: username, name: username }, token);
+
+  await channel.create();
+
+  await channel.addMembers([username, "admin"]);
+
+  await channel.sendMessage({
+    text: "Welcome to this channel. Ask me few questions",
+    user: { id: "admin" },
+  });
+
+  res.json({
+    status: true,
+    token,
+    username,
+  });
 });
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
