@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 
 const port = process.env.PORT || 5200;
 
-async function runSample(text, projectId = "owambe-163221") {
+async function runSample(text, projectId = process.env.GOOGLE_PROJECT_ID ) {
   const sessionId = uuid.v4();
 
   const sessionClient = new dialogflow.SessionsClient();
