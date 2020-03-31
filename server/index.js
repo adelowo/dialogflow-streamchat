@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 
 const port = process.env.PORT || 5200;
 
-async function runSample(text, projectId = process.env.GOOGLE_PROJECT_ID ) {
+async function runSample(text, projectId = process.env.GOOGLE_PROJECT_ID) {
   const sessionId = uuid.v4();
 
   const sessionClient = new dialogflow.SessionsClient();
@@ -60,14 +60,17 @@ app.post("/dialogflow", async (req, res) => {
 
   runSample(text)
     .then((text) => {
-      channel.sendMessage({
-        text: text,
-        user: {
-          id: "admin",
-          image: "https://bit.ly/2TIt8NR",
-          name: "Admin bot",
-        },
-      });
+      channel
+        .sendMessage({
+          text: text,
+          user: {
+            id: "admin",
+            image: "https://bit.ly/2TIt8NR",
+            name: "Admin bot",
+          },
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
       res.json({
         status: true,
         text: text,
